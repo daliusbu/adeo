@@ -24,5 +24,9 @@ class DatabaseSeeder extends Seeder
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
+
+        factory('App\Product', 20)->create();
+
+        factory('App\Review', 3)->create();
     }
 }
