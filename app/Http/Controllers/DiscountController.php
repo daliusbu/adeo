@@ -9,7 +9,7 @@ use Mews\Purifier\Facades\Purifier;
 
 class DiscountController extends Controller
 {
-    public function store($id = null, Request $request, Discount $discount)
+    public function store(Request $request, Discount $discount)
     {
 
         $request->merge([
@@ -30,8 +30,7 @@ class DiscountController extends Controller
 
         if ($validated) {
             try {
-
-                $discount->updateOrCreate(['id' => $id], $validated);
+                $discount->create($validated);
                 return redirect()->to(route('product.index'));
             } catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->withErrors([$e->getMessage()])->withInput();
