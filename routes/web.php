@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('product', 'ProductController@index')->name('product.index');
+Route::post('product/{id}/view', 'ProductController@view')->name('product.view');
+Route::get('product/add', 'ProductController@add')->name('product.add');
+Route::put('product/{id}/edit', 'ProductController@edit')->name('product.edit');
+Route::post('product/store', 'ProductController@store')->name('product.store');
+Route::delete('product/delete', 'ProductController@delete')->name('product.delete');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
