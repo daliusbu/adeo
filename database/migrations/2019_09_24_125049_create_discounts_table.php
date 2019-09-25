@@ -16,10 +16,10 @@ class CreateDiscountsTable extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('tax')->default(21);
-            $table->boolean('tax_active')->default(true);
-            $table->integer('g_discount')->default(0);
-            $table->boolean('gd_active')->default(false);
+            $table->integer('tax')->nullable();
+            $table->integer('tax_active')->nullable();
+            $table->integer('g_discount')->nullable();
+            $table->integer('gd_active')->nullable();
             $table->timestamps();
 
             $table->engine = 'InnoDB';

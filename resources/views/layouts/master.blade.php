@@ -22,6 +22,7 @@
 <body>
 @include('partials.navbar')
 <div class="container">
+    @include('partials.form-errors')
     @yield('content')
 </div>
 

@@ -25,3 +25,5 @@ Route::delete('product/delete', 'ProductController@delete')->name('product.delet
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/discount/store', 'DiscountController@store')->name('discount.store');

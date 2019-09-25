@@ -12,7 +12,8 @@ class Product extends Model
         'description',
         'picture',
         'price',
-        'discount'
+        'discount',
+        'picture',
     ];
 
     public function review(){

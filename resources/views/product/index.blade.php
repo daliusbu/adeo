@@ -9,13 +9,20 @@
             <a href="#" id="button-trash">&nbsp; DELETE</a>
         </div>
         <div class="col-md-8" id="taxes">
-            <form action="">
-                <input type="checkbox" name="tax_active">
-                <label for="tax_axtive">Tax</label>
-                <input class="col-2" type="text" name="tax">
-                <input class="ml-3" type="checkbox" name="gd_active">
-                <label for="gd_axtive">Global discount</label>
-                <input class="col-2" type="text" name="g_discount">
+            <form action="{{ route('discount.store') }}" method="post">
+                @csrf
+                <input type="hidden" name="tax_active" value="0">
+                <input type="checkbox" name="tax_active" value="1"
+                       {{ $discount? ($discount->tax_active == 1? "checked": "") : "" }}>
+                <label for="tax_active">Tax</label>
+                <input class="col-2" type="text" name="tax"
+                       value="{{ $discount? $discount->tax :''}}">
+                <input type="hidden" name="gd_active" value="0">
+                <input class="ml-3" type="checkbox" name="gd_active" value="1"
+                    {{ $discount? ($discount->gd_active == 1? "checked": "") : ""}}>
+                <label for="gd_active">Global discount</label>
+                <input class="col-2" type="text" name="g_discount"
+                       value="{{ $discount? $discount->g_discount :''}}">
                 <button class="ml-3" type="submit">SAVE</button>
             </form>
 
@@ -87,9 +94,9 @@
                 });
             });
             // Filter form submit on select change
-            document.getElementById('list-filter').addEventListener('change', function () {
-                document.getElementById('filter-form').submit();
-            });
+            // document.getElementById('list-filter').addEventListener('change', function () {
+            //     document.getElementById('filter-form').submit();
+            // });
         }, false);
     </script>
 @endsection

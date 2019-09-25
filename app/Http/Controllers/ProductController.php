@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Discount;
 use Illuminate\Http\Request;
 use App\Product;
 use Mews\Purifier\Facades\Purifier;
@@ -10,9 +11,10 @@ use Mews\Purifier\Facades\Purifier;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::paginate();
+        $products = Product::orderBy('updated_at', 'desc')->paginate();
+        $discount = Discount::orderBy('updated_at', 'desc')->first();
 
-       return view('product.index', ['products'=>$products]);
+       return view('product.index', ['products'=>$products, 'discount'=>$discount]);
     }
 
     public function add(){
@@ -33,7 +35,15 @@ class ProductController extends Controller
             'description' => 'string|required',
             'sku' => 'string|required',
             'price' => 'numeric|required',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
         ]);
+
+        $pictureName = time().'.'.$request->picture->extension();
+        $request->picture->move(public_path('images'), $pictureName);
+        $validated['picture'] = 'images/' . $pictureName;
+//        dd( $validated['picture']);
+
         if ($validated) {
             try {
                 $product->updateOrCreate(['id' => $id], $validated);
