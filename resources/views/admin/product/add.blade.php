@@ -5,7 +5,7 @@
     @include('partials.form-errors')
 
     <div>
-        <form class="col-md-8" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+        <form class="col-md-8" action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="name">Name</label>
@@ -29,14 +29,17 @@
                 <label class="col-form-label-sm col-sm-2" for="price">Price</label>
                 <input class="form-control-sm col-sm-8" type="text" name="price"  value="{{ request()->old('price') }}">
             </div>
-
+            <div class="form-group">
+                <label class="col-form-label-sm col-sm-2" for="discount">Discount</label>
+                <input class="form-control-sm col-sm-8" type="text" name="discount"  value="{{ request()->old('discount') }}">
+            </div>
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="picture">Picture</label>
                 <input class="form-control-sm col-sm-8" type="file" name="picture" value="{{ request()->old('picture') }}">
             </div>
 
             <button class="my-4 offset-2" type="submit">Save Product</button>
-            <a class="ml-5" href="{{ route('product.index') }}"><-- Back</a>
+            <a class="ml-5" href="{{ route('admin.product.index') }}"><-- Back</a>
         </form>
     </div>
 @endsection

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
-    <a class="navbar-brand" href="{{ route('product.index') }}">PRODUCTS</a>
+    <a class="navbar-brand" href="{{ route('admin.product.index') }}">PRODUCTS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,12 +7,13 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('product.index') }}">Products<span class="sr-only">(current)</span></a>
-            </li>
             @auth
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('admin.product.index') }}">Products
+                        <span class="sr-only">(current)</span></a>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('product.add') }}">Add grade</a>
+                    <a class="nav-link" href="{{ route('admin.product.add') }}">Add Product</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -20,10 +21,10 @@
                        aria-haspopup="true" aria-expanded="false">
                         Students
                     </a>
-{{--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-{{--                        <a class="dropdown-item" href="{{ route('crud.student.index') }}">List students</a>--}}
-{{--                        <a class="dropdown-item" href="{{ route('crud.student.add') }}">Add Student</a>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+                    {{--                        <a class="dropdown-item" href="{{ route('crud.student.index') }}">List students</a>--}}
+                    {{--                        <a class="dropdown-item" href="{{ route('crud.student.add') }}">Add Student</a>--}}
+                    {{--                    </div>--}}
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -31,10 +32,10 @@
                        aria-haspopup="true" aria-expanded="false">
                         Lectures
                     </a>
-{{--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-{{--                        <a class="dropdown-item" href="{{ route('crud.lecture.index') }}">List Lectures</a>--}}
-{{--                        <a class="dropdown-item" href="{{ route('crud.lecture.add') }}">Add Lecture</a>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+                    {{--                        <a class="dropdown-item" href="{{ route('crud.lecture.index') }}">List Lectures</a>--}}
+                    {{--                        <a class="dropdown-item" href="{{ route('crud.lecture.add') }}">Add Lecture</a>--}}
+                    {{--                    </div>--}}
 
                 </li>
             @endauth

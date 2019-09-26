@@ -16,11 +16,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/9586847ecb.js" crossorigin="anonymous"></script>
+
+    <!-- Rating stars css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <!-- Rating stars JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
 @include('partials.navbar')
+
 <div class="container">
     @include('partials.form-errors')
     @yield('content')
@@ -28,5 +35,6 @@
 
 @yield('scripts')
 <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>
