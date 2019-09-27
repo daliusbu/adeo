@@ -9,9 +9,10 @@ class Review extends Model
     protected $fillable = [
         'comment',
         'stars',
+        'product_id'
     ];
 
     public function product(){
-        return $this->belongsTo('App/Product');
+        return $this->belongsTo('App\Product');
     }
 }

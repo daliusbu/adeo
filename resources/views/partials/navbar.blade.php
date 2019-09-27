@@ -7,39 +7,28 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('admin.product.index') }}">Products
+                    <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.product.add') }}">Add Product</a>
+            </li>
             @auth
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('admin.product.index') }}">Products
-                        <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.product.add') }}">Add Product</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        Students
+                        Admin
                     </a>
-                    {{--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-                    {{--                        <a class="dropdown-item" href="{{ route('crud.student.index') }}">List students</a>--}}
-                    {{--                        <a class="dropdown-item" href="{{ route('crud.student.add') }}">Add Student</a>--}}
-                    {{--                    </div>--}}
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Lectures
-                    </a>
-                    {{--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-                    {{--                        <a class="dropdown-item" href="{{ route('crud.lecture.index') }}">List Lectures</a>--}}
-                    {{--                        <a class="dropdown-item" href="{{ route('crud.lecture.add') }}">Add Lecture</a>--}}
-                    {{--                    </div>--}}
-
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('admin.product.index') }}">List products</a>
+                        <a class="dropdown-item" href="{{ route('admin.product.add') }}">Add Product</a>
+                    </div>
                 </li>
             @endauth
         </ul>
+
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 {{ env('APP_TITLE') }}

@@ -29,3 +29,10 @@ Route::delete('admin/product/delete', 'Admin\ProductController@delete')->name('a
 Route::post('/discount/store', 'DiscountController@store')->name('discount.store');
 
 Route::post('/review/store', 'ReviewController@store')->name('review.store');
+
+
+
+Route::get('product', 'ProductController@index')->name('product.index');
+
+
+Route::get('/review/{product}/add', 'ReviewController@add')->name('review.add');
