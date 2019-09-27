@@ -12,7 +12,7 @@
                 <p>{{ $product->description }}</p>
                 <h6>{{ $product->price }} Eur</h6>
                 <span class="rated">{{ $avgStars }}</span>
-                <span class="small pl-2">({{ $ratingsCount }} votes)</span>
+                <span class="small ml-2">({{ $ratingsCount }} votes)</span>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
                 <div class="row card-text">
                     <div class="col-sm-3">
                         <div class="col-sm-10 rated">{{$review->stars}}</div>
-                        <div class="small text-muted">
+                        <div class="small text-muted ml-2">
                             {{$review->created_at->format('Y-m-d')}}
                         </div>
                     </div>

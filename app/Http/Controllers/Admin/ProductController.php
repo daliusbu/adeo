@@ -12,7 +12,7 @@ use Mews\Purifier\Facades\Purifier;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::orderBy('updated_at', 'desc')->paginate();
+        $products = Product::orderBy('updated_at', 'desc')->paginate(9);
         $discount = Discount::orderBy('updated_at', 'desc')->first();
 
        return view('admin.product.index', ['products'=>$products, 'discount'=>$discount]);

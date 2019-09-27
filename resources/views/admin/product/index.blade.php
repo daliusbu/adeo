@@ -2,15 +2,6 @@
 
 @section('content')
     <h2>Product list</h2>
-
-    <div id="rateYo"></div>
-    <form action="{{ route('review.store') }}" method="POST">
-        @csrf
-        <input type="hidden" name="rating" id="ratingas" value="Petras">
-        <textarea name="comment" id="" cols="30" rows="10"></textarea>
-        <input type="submit" value="Send">
-    </form>
-
     <div class="row my-3">
         <div class="col-sm-4 mr-auto ">
             <a href="{{ route('admin.product.add') }}">ADD </a>
@@ -69,7 +60,8 @@
                             @endif
                             <a href="{{ route('admin.product.edit', ['id' => $product->id]) }}">{{ 'Edit' }}</a>
                         </td>
-                        <td><a href="{{ route('admin.product.view', ['id' => $product->id]) }}">{{ $product->name }}</a></td>
+                        <td><a href="{{ route('admin.product.view', ['id' => $product->id]) }}">{{ $product->name }}</a>
+                        </td>
                         <td>{!! $product->description !!}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->discount }}</td>
@@ -92,10 +84,10 @@
             // Trash form submit
             document.getElementById('button-trash').addEventListener('click', function () {
 
-                var checked=false;
+                var checked = false;
                 var elements = document.getElementsByName("selected[]");
-                for(var i=0; i < elements.length; i++){
-                    if(elements[i].checked) {
+                for (var i = 0; i < elements.length; i++) {
+                    if (elements[i].checked) {
                         checked = true;
                     }
                 }
@@ -126,7 +118,7 @@
     </script>
 
 
-{{-- Star Rating JavaScript --}}
+    {{-- Star Rating JavaScript --}}
     <script>
         //Make sure that the dom is ready
         $(function () {

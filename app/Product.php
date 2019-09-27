@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    public $avgRating;
+    public $countRating;
     protected $fillable = [
         'sku',
         'name',

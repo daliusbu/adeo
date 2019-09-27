@@ -18,17 +18,18 @@ class ReviewController extends Controller
     {
         $reviews = Review::where('product_id', $productId)->orderBy('created_at', 'desc')->paginate(3);
         $product = Product::find($productId);
-        $count = $sum = 0;
+        $count = $sum = $ratingsCount = $avgStars = 0;
         foreach ($reviews as $review) {
             $count++;
             $sum += $review->stars;
         }
-        $avgStars = round($sum / $count, 1);
-        $ratingsCount = Review::where('product_id', $productId)->count();
+        if ($count > 0){
+            $avgStars = round($sum / $count, 1);
+            $ratingsCount = Review::where('product_id', $productId)->count();
+        }
 
         return view('review.add', compact('product', 'avgStars', 'ratingsCount', 'reviews'));
     }
-
 
     public function store($id = null, Request $request, Review $review)
     {
@@ -42,7 +43,6 @@ class ReviewController extends Controller
             'stars' => 'numeric|max:5|min:0',
             'comment' => 'string|required',
         ]);
-
         if ($validated) {
             try {
                 $review->Create($validated);
