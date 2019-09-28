@@ -18,6 +18,10 @@
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/9586847ecb.js" crossorigin="anonymous"></script>
 
+    <!-- include summernote css/js -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+
     <!-- Rating stars css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <!-- Rating stars JavaScript -->

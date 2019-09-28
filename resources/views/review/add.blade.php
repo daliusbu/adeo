@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-body">
             <div class="card-title">
                 <h2>User reviews</h2>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-sm-9">
                         <strong>{{ $review->title }}</strong>
-                        <p>{{$review->comment}}</p>
+                        <p>{!! $review->comment !!}</p>
                     </div>
                 </div>
                 <hr>
@@ -48,11 +48,10 @@
             <h3>Leave your comment:</h3>
         </div>
         <div class="col-sm-9">
-
             <form action="{{ route('review.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                <input type="hidden" name="rating" id="ratingas">
+                <input type="hidden" name="rating" id="ratingas" value="3">
                 <div class="form-group">
                     <label for="username">Your name</label>
                     <input class="form-control" id="username" type="text" name="username" placeholder="Name">
@@ -66,11 +65,11 @@
                     <div class="mb-4 " id="rateYo"></div>
                 </div>
                 <div class="form-group">
-                    <label for="">Review</label>
-                    <textarea class="form-control" name="comment" id="" cols="50" rows="5"></textarea>
+                    <label for="">Comment</label>
+                    <textarea class="form-control" name="comment" id="summernote"></textarea>
                 </div>
                 <div>
-                    <input class="btn-info mt-3" type="submit" value="Submit">
+                    <input class="btn-info mt-2" type="submit" value="Submit">
                 </div>
             </form>
         </div>
@@ -82,7 +81,7 @@
     <script>
         $(function () {
             $("#rateYo").rateYo({
-                rating: 1,
+                rating: 3,
                 starWidth: "20px",
                 fullStar: true,
                 onSet: function (rating) {
@@ -105,4 +104,5 @@
             }
         });
     </script>
+    @include('partials.wysiwyg')
 @endsection

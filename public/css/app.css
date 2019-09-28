@@ -3,6 +3,14 @@
   height: 100px;
 }
 
+.medium-picture {
+  height: 300px;
+}
+
+body .popover {
+  display: none !important;
+}
+
 @media (min-width: 600px) {
   #taxes {
     text-align: right;

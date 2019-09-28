@@ -50,7 +50,7 @@ class ProductController extends Controller
         if ($request->picture){
             $pictureName = time().'.'.$request->picture->extension();
             $request->picture->move(public_path('images'), $pictureName);
-            $validated['picture'] = 'images/' . $pictureName;
+            $validated['picture'] = $pictureName;
         }
 
         if ($validated) {

@@ -65,7 +65,11 @@
                         <td>{!! $product->description !!}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->discount }}</td>
-                        <td><img class="small-picture" src="{{ $product->picture }}" alt=""></td>
+                        @if(file_exists(public_path().'/images/'. $product->picture))
+                            <td><img class="small-picture" src="{{ asset('images/'. $product->picture)}}" alt=""></td>
+                        @else
+                            <td><img class="small-picture" src="{{ $product->picture}}" alt=""></td>
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>

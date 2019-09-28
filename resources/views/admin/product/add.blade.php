@@ -18,11 +18,14 @@
                        value="{{ request()->old('sku') }}">
             </div>
             <div class="row my-3">
+
+
                 <div class="col-sm-2">
                     <label class="col-form-label-sm" for="ck-editor-field">Description</label>
                 </div>
                 <div class="col-sm-10">
-                    <textarea class="form-control" rows="4" cols="80" name="description" id="ck-editor-field" value="">{{ request()->old('description') }}</textarea>
+                    <textarea class="" name="description"
+                              id="summernote">{{ request()->old('description') }}</textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -45,5 +48,5 @@
 @endsection
 
 @section('scripts')
-    @include('partials.ck-editor')
+    @include('partials.wysiwyg')
 @endsection

@@ -7,7 +7,11 @@
             @foreach($products as $product)
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
-                        <img src="{{ $product->picture }}" alt="Image">
+                        @if(file_exists(public_path().'/images/'. $product->picture))
+                            <td><img class="medium-picture" src="{{ asset('images/'. $product->picture)}}" alt=""></td>
+                        @else
+                            <td><img class="medium-picture" src="{{ $product->picture}}" alt=""></td>
+                        @endif
                         <div class="card-body" style="">
                             <div style="height: 300px; text-overflow: ellipsis; overflow: hidden;">
                                 <h5>{{ $product->name }}</h5>
@@ -74,7 +78,6 @@
                     alert('Please check the Product you want to delete.');
                     return;
                 }
-
                 const confirmed = confirm("Delete selected items?");
                 if (confirmed) {
                     document.getElementById('selected-form').submit();
