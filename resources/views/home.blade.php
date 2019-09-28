@@ -1,23 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+    <div class="text-center">
+        <h2 class="my-5">Hello and Welcome!</h2>
+        <p>This is our products page. You can find many products here and review them if you want.</p>
+        <p>You do not need to be logged in to review the products, but please do that responsibly and with due respect
+            to other viewers.</p>
+        <p class="small">Please <a href="{{ route('login') }}">sign in</a> if you are administrator of this site</p>
     </div>
-</div>
+@endsection
+
+@section('scripts')
 @endsection

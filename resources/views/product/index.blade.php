@@ -5,7 +5,7 @@
     <div class="row">
         @if (isset($products))
             @foreach($products as $product)
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-6">
                     <div class="card mb-4 shadow-sm">
                         @if(file_exists(public_path().'/images/'. $product->picture))
                             <td><img class="medium-picture" src="{{ asset('images/'. $product->picture)}}" alt=""></td>
@@ -15,7 +15,7 @@
                         <div class="card-body" style="">
                             <div style="height: 300px; text-overflow: ellipsis; overflow: hidden;">
                                 <h5>{{ $product->name }}</h5>
-                                <p class="card-text text-small">{{ $product->description }}</p>
+                                <p class="card-text text-small">{!! $product->description !!}</p>
                             </div>
                             <div class="my-3 d-flex justify-content-between align-items-center">
                                 <div>
@@ -66,7 +66,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Trash form submit
             document.getElementById('button-trash').addEventListener('click', function () {
-
                 var checked = false;
                 var elements = document.getElementsByName("selected[]");
                 for (var i = 0; i < elements.length; i++) {
