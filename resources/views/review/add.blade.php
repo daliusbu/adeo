@@ -25,11 +25,15 @@
                 <div class="row card-text">
                     <div class="col-sm-3">
                         <div class="col-sm-10 rated">{{$review->stars}}</div>
+                        <h6>{{ $review->username }}</h6>
                         <div class="small text-muted ml-2">
                             {{$review->created_at->format('Y-m-d')}}
                         </div>
                     </div>
-                    <div class="col-sm-9">{{$review->comment}}</div>
+                    <div class="col-sm-9">
+                        <strong>{{ $review->title }}</strong>
+                        <p>{{$review->comment}}</p>
+                    </div>
                 </div>
                 <hr>
             @endforeach
@@ -44,12 +48,27 @@
             <h3>Leave your comment:</h3>
         </div>
         <div class="col-sm-9">
-            <div class="mb-4" id="rateYo"></div>
+
             <form action="{{ route('review.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <input type="hidden" name="rating" id="ratingas">
-                <textarea name="comment" id="" cols="50" rows="5"></textarea>
+                <div class="form-group">
+                    <label for="username">Your name</label>
+                    <input class="form-control" id="username" type="text" name="username" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input class="form-control" id="title" type="text" name="title" placeholder="Review Title">
+                </div>
+                <div class="form-group">
+                    <label for="">Rating</label>
+                    <div class="mb-4 " id="rateYo"></div>
+                </div>
+                <div class="form-group">
+                    <label for="">Review</label>
+                    <textarea class="form-control" name="comment" id="" cols="50" rows="5"></textarea>
+                </div>
                 <div>
                     <input class="btn-info mt-3" type="submit" value="Submit">
                 </div>
@@ -59,16 +78,15 @@
 @endsection
 
 @section('scripts')
-    {{-- Star Rating JavaScript --}}
+    {{-- Star Rating --}}
     <script>
         $(function () {
             $("#rateYo").rateYo({
                 rating: 1,
                 starWidth: "20px",
                 fullStar: true,
-                onSet: function (rating, rateYoInstance) {
+                onSet: function (rating) {
                     $('#ratingas').val(rating);
-                    alert("Rating is set to: " + rating);
                 }
             });
         });

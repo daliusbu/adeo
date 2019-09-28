@@ -9,6 +9,8 @@ use Faker\Generator as Faker;
 $factory->define(Review::class, function (Faker $faker) {
     $products = Product::all()->pluck('id')->toArray();
     return [
+        'username' => $faker->name,
+        'title' => $faker->sentence,
         'comment' => $faker->sentence,
         'stars' => $faker->numberBetween(1,5),
         'product_id' => $products[array_rand($products)],

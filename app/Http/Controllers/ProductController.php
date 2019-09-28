@@ -4,24 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Discount;
 use App\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    protected $g_discount;
-    protected $gd_active;
-    protected $tax;
-    protected $tax_active;
+    protected $g_discount = 0;
+    protected $gd_active = 0;
+    protected $tax = 0;
+    protected $tax_active = 0;
 
     public function index()
     {
         $products = Product::orderBy('updated_at', 'desc')->with('review')->paginate(9);
         $discount = Discount::orderBy('updated_at', 'desc')->first();
 
-        $this->tax = $discount->tax ? $discount->tax : 0;
-        $this->tax_active = $discount->tax_active ? $discount->tax_active : 0;
-        $this->g_discount = $discount->g_discount ? $discount->g_discount : 0;
-        $this->gd_active = $discount->gd_active ? $discount->gd_active : 0;
+        if($discount){
+            $this->tax = $discount->tax ? $discount->tax : 0;
+            $this->tax_active = $discount->tax_active ? $discount->tax_active : 0;
+            $this->g_discount = $discount->g_discount ? $discount->g_discount : 0;
+            $this->gd_active = $discount->gd_active ? $discount->gd_active : 0;
+        }
+
 //        dd($this->tax_active);
         $products->getCollection()->transform(function ($product) {
             $avgRating = $product->review->avg('stars');

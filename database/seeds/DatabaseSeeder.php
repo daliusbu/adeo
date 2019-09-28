@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
                 ]);
 
         factory('App\Product', 20)->create();
-
-        factory('App\Review', 3)->create();
+        factory('App\Review', 100)->create();
     }
 }
