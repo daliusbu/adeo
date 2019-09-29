@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('picture')->nullable();
             $table->integer('price');
             $table->integer('discount')->nullable();
+            $table->integer('status');
             $table->timestamps();
 
             $table->engine = 'InnoDB';
@@ -29,7 +30,9 @@ class CreateProductsTable extends Migration
 
             $table->index(['name']);
             $table->index(['sku']);
+            $table->index(['price']);
             $table->index(['discount']);
+            $table->index(['status']);
         });
     }
 

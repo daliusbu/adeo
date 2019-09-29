@@ -9,12 +9,13 @@ class ProductController extends Controller
 {
     protected $g_discount = 0;
     protected $gd_active = 0;
+    protected $gd_fixed = 0;
     protected $tax = 0;
     protected $tax_active = 0;
 
     public function index()
     {
-        $products = Product::orderBy('updated_at', 'desc')->with('review')->paginate(9);
+        $products = Product::where('status', 1)->orderBy('updated_at', 'desc')->with('review')->paginate(9);
         $discount = Discount::orderBy('updated_at', 'desc')->first();
 
         if($discount){
@@ -22,9 +23,8 @@ class ProductController extends Controller
             $this->tax_active = $discount->tax_active ? $discount->tax_active : 0;
             $this->g_discount = $discount->g_discount ? $discount->g_discount : 0;
             $this->gd_active = $discount->gd_active ? $discount->gd_active : 0;
+            $this->gd_fixed = $discount->gd_fixed ? $discount->gd_fixed : 0;
         }
-
-//        dd($this->tax_active);
         $products->getCollection()->transform(function ($product) {
             $avgRating = $product->review->avg('stars');
             $countRating = $product->review->count('stars');
@@ -43,9 +43,6 @@ class ProductController extends Controller
                 return $product;
             });
         }
-
-
-//        dd($products);
 
         return view('product.index', ['products' => $products, 'discount' => $discount]);
     }

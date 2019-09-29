@@ -13,8 +13,9 @@
                             <td><img class="medium-picture" src="{{ $product->picture}}" alt=""></td>
                         @endif
                         <div class="card-body" style="">
-                            <div style="height: 300px; text-overflow: ellipsis; overflow: hidden;">
+                            <div class="product-description" >
                                 <h5>{{ $product->name }}</h5>
+                                <span class="small text-muted">Article No: {{ $product->sku }}</span>
                                 <p class="card-text text-small">{!! $product->description !!}</p>
                             </div>
                             <div class="my-3 d-flex justify-content-between align-items-center">
@@ -30,12 +31,17 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center small">
-
                                 @if($product->discount > 0 || ($discount->g_discount > 0 && $discount->gd_active == 1))
                                     <del class="text-muted">{{ $product->price }} Eur</del>
                                 @endif
-                                <span
-                                    class="">{{ round($product->price * (1 - $product->discount / 100), 2) }} Eur</span>
+
+                                @if($discount->gd_fixed === 1 && $discount->gd_active)
+                                    <span
+                                        class="">{{ $product->price - $product->discount }} Eur</span>
+                                @else
+                                    <span
+                                        class="">{{ round($product->price * (1 - $product->discount / 100), 2) }} Eur</span>
+                                @endif
 
                                 @if( isset($discount) && $discount->tax_active == 1)
                                     <span>(Incl. Tax)</span>

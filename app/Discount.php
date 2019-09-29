@@ -11,6 +11,7 @@ class Discount extends Model
       'tax_active',
       'g_discount',
       'gd_active',
+      'gd_fixed',
     ];
 
 }

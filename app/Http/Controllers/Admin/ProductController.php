@@ -37,6 +37,7 @@ class ProductController extends Controller
             'sku' => Purifier::clean($request->sku),
             'price' => Purifier::clean($request->price),
             'discount' => Purifier::clean($request->discount),
+            'status' => Purifier::clean($request->status),
         ]);
         $validated = $request->validate([
             'name' => 'string|required|max:255',
@@ -44,6 +45,7 @@ class ProductController extends Controller
             'sku' => 'string|required',
             'price' => 'numeric|required',
             'discount' => 'numeric|required',
+            'status' => 'numeric|required',
             'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 

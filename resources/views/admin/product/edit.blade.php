@@ -9,6 +9,11 @@
               enctype="multipart/form-data">
             @method("PUT")
             @csrf
+            <input type="hidden" name="status" value="0">
+            <label class="col-sm-2" for="status">Status</label>
+            <input class="ml-3" type="checkbox" name="status" value="1"
+                   @if( $product->status == 1 ) checked @endif>
+            <span class="ml-1">Enabled</span>
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="name">Name</label>
                 <input class="form-control-sm col-sm-8" type="text" name="name" id="name"
@@ -42,7 +47,7 @@
                 <input class="form-control-sm col-sm-8" type="file" name="picture" value="{{ $product->picture }}">
             </div>
 
-            <button class="my-4 offset-2" type="submit">Update Product</button>
+            <button class="mt-3 mb-5 offset-2" type="submit">Update Product</button>
             <a class="ml-5" href="{{ route('admin.product.index') }}"><-- Back</a>
         </form>
     </div>

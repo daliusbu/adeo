@@ -1,23 +1,40 @@
+body .popover{display:none !important; }
 .small-picture {
     width: 100px;
     height: 100px;
 }
-
 .medium-picture {
     height: 300px;
+}
+.status-icon{
+    width: 20px;
+    margin-left: 20px;
+}
+.product-description{
+    height: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.textinput-small{
+    width: 50px;
+}
+.md-stack{
+    margin-left: 20px;
 }
 #app-icon{
     width: 50px;
 }
-
-body .popover{display:none !important; }
 
 @media (min-width: 600px) {
     #taxes {
         text-align: right;
     }
 }
-
+@media (min-width: 725px) {
+    .md-stack{
+        display: inline-block;
+    }
+}
 @media (max-width: 992px){
     .container {
         width: 100%;

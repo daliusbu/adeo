@@ -17,12 +17,14 @@ class DiscountController extends Controller
             'tax_active' => Purifier::clean($request->tax_active),
             'g_discount' => Purifier::clean($request->g_discount),
             'gd_active' => Purifier::clean($request->gd_active),
+            'gd_fixed' => Purifier::clean($request->gd_fixed),
         ]);
         $validated = $request->validate([
             'tax' => 'numeric|max:50',
             'tax_active' => 'numeric',
             'g_discount' => 'numeric|max:100',
             'gd_active' => 'numeric',
+            'gd_fixed' => 'numeric|max:1',
         ]);
 
         $validated['tax'] = $validated['tax'] === "" ? null : $validated['tax'];

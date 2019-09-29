@@ -8,6 +8,12 @@
         <form class="col-md-8" action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <input type="hidden" name="status" value="0">
+                <label class="col-sm-2" for="status">Status</label>
+                <input class="ml-3" type="checkbox" name="status" value="1" @if(old('status') != 0) checked @endif>
+                <span class="ml-1">Enabled</span>
+            </div>
+            <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="name">Name</label>
                 <input class="form-control-sm col-sm-8" type="text" name="name" id="name"
                        value="{{ request()->old('name') }}">

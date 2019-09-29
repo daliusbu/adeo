@@ -13,5 +13,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'picture'=>$faker->imageUrl(300, 300),
         'price'=>$faker->numberBetween(10, 500),
         'discount'=>$faker->numberBetween(0, 32),
+        'status'=>$faker->numberBetween(0, 1),
     ];
 });

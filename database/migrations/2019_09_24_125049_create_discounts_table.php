@@ -20,6 +20,7 @@ class CreateDiscountsTable extends Migration
             $table->integer('tax_active')->nullable();
             $table->integer('g_discount')->nullable();
             $table->integer('gd_active')->nullable();
+            $table->integer('gd_fixed')->nullable()->default(0);
             $table->timestamps();
 
             $table->engine = 'InnoDB';

@@ -2,31 +2,50 @@
 
 @section('content')
     <h2>Product list</h2>
+    <div class="alert alert-secondary">
+        <form action="{{ route('discount.store') }}" method="post">
+            @csrf
+            <input type="hidden" name="tax_active" value="0">
+            <div class="">
+                <div class="md-stack">
+                    <input type="checkbox" name="tax_active" value="1"
+                        {{ $discount? ($discount->tax_active == 1? "checked": "") : "" }}>
+                    <label for="tax_active">Tax</label>
+                    <input class="textinput-small" type="text" name="tax"
+                           value="{{ $discount? $discount->tax :''}}">
+                </div>
+                <div class="md-stack">
+                    <input type="hidden" name="gd_active" value="0">
+                    <input class="" type="checkbox" name="gd_active" value="1"
+                        {{ $discount? ($discount->gd_active == 1? "checked": "") : ""}}>
+                    <label for="gd_active">Global discount</label>
+                    <input class="textinput-small" type="text" name="g_discount"
+                           value="{{ $discount? $discount->g_discount :''}}">
+                    <input type="radio" name="gd_fixed" value="0"
+                        {{ $discount? ($discount->gd_fixed != 1? "checked": "") : "checked"}}
+                    > (%)
+                    <input type="radio" name="gd_fixed" value="1"
+                        {{ $discount? ($discount->gd_fixed == 1? "checked": "") : ""}}
+                    > (fixed)
+                </div>
+                <div class="md-stack">
+                    <button class="" type="submit">SAVE</button>
+                </div>
+            </div>
+
+
+
+
+        </form>
+    </div>
+
     <div class="row my-3">
         <div class="col-sm-4 mr-auto ">
             <a href="{{ route('admin.product.add') }}">ADD </a>
-            <a href="#" id="button-trash">&nbsp; DELETE</a>
-        </div>
-        <div class="col-md-8" id="taxes">
-            <form action="{{ route('discount.store') }}" method="post">
-                @csrf
-                <input type="hidden" name="tax_active" value="0">
-                <input type="checkbox" name="tax_active" value="1"
-                    {{ $discount? ($discount->tax_active == 1? "checked": "") : "" }}>
-                <label for="tax_active">Tax</label>
-                <input class="col-2" type="text" name="tax"
-                       value="{{ $discount? $discount->tax :''}}">
-                <input type="hidden" name="gd_active" value="0">
-                <input class="ml-3" type="checkbox" name="gd_active" value="1"
-                    {{ $discount? ($discount->gd_active == 1? "checked": "") : ""}}>
-                <label for="gd_active">Global discount</label>
-                <input class="col-2" type="text" name="g_discount"
-                       value="{{ $discount? $discount->g_discount :''}}">
-                <button class="ml-3" type="submit">SAVE</button>
-            </form>
-
+            <a href="#" id="button-trash">&nbsp;DELETE</a>
         </div>
     </div>
+
     @if(session()->has('message'))
         <div class="alert alert-danger">
             {{ session()->get('message') }}
@@ -42,7 +61,9 @@
                 <thead>
                 <tr>
                     <th><input type="checkbox" id="select-all"></th>
+                    <th>Status</th>
                     <th>Product</th>
+                    <th>SKU</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>Discount</th>
@@ -53,15 +74,17 @@
                 @foreach ($products as $product)
                     <tr>
                         <td>
-                            @if (isset($product->hasgrade))
-                                <input type="checkbox" name="selected[]" value="{{ $product->id }}" disabled>&nbsp;
-                            @else
-                                <input type="checkbox" name="selected[]" value="{{ $product->id }}">&nbsp;
-                            @endif
+                            <input type="checkbox" name="selected[]" value="{{ $product->id }}">&nbsp;
                             <a href="{{ route('admin.product.edit', ['id' => $product->id]) }}">{{ 'Edit' }}</a>
                         </td>
+                        <td>@if($product->status == 1)
+                                <img class="status-icon" src="{{ asset('icons/checked.svg') }}" alt="Enabled">
+                            @else
+                                <img class="status-icon" src="{{ asset('icons/cross.svg') }}" alt="Disabled">
+                            @endif</td>
                         <td><a href="{{ route('admin.product.view', ['id' => $product->id]) }}">{{ $product->name }}</a>
                         </td>
+                        <td>{{ $product->sku }}</td>
                         <td>{!! $product->description !!}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->discount }}</td>
