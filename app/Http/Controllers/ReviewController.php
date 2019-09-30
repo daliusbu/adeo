@@ -5,17 +5,29 @@ namespace App\Http\Controllers;
 use App\Review;
 use App\Services\DiscountService;
 use App\Services\ProductService;
+use App\Services\ReviewService;
 use Illuminate\Http\Request;
-use Mews\Purifier\Facades\Purifier;
 
+/**
+ * Class ReviewController
+ * @package App\Http\Controllers
+ */
 class ReviewController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $reviews = Review::with('product')->orderBy('updated_at', 'desc')->paginate(10);
         return view('admin.review.index', compact('reviews'));
     }
 
+    /**
+     * @param $productId
+     * @param ProductService $productService
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function add($productId, ProductService $productService)
     {
         $product = $productService->getProduct($productId);
@@ -29,32 +41,31 @@ class ReviewController extends Controller
         return view('review.add', compact('product', 'reviews', 'discount'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $review = Review::findOrFail($id);
         return view('admin.review.edit', ['review' => $review]);
     }
 
-    public function store(Review $review, Request $request )
+    /**
+     * @param null $id
+     * @param Request $request
+     * @param ReviewService $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store($id = null, Request $request, ReviewService $service)
     {
-        $request->merge([
-            'product_id' => Purifier::clean($request->product_id),
-            'stars' => Purifier::clean($request->rating),
-            'comment' => Purifier::clean($request->comment),
-            'title' => Purifier::clean($request->title),
-            'username' => Purifier::clean($request->username),
-        ]);
-        $validated = $request->validate([
-            'product_id' => 'numeric|required',
-            'stars' => 'numeric|max:5|min:0',
-            'comment' => 'string|required',
-            'title' => 'string|required',
-            'username' => 'string|required',
-        ]);
+        $review = new Review();
+        $validated = $service->validate($request);
+
         if ($validated) {
             try {
-                $review->update($validated);
-                return redirect()->to(route('admin.review.index'));
+                $review->updateOrCreate(compact('id'), $validated);
+                return redirect()->to(route('review.add', ['product' => $validated['product_id']]));
             } catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->withErrors([$e->getMessage()])->withInput();
             } catch (\Exception $e) {
@@ -64,6 +75,10 @@ class ReviewController extends Controller
         return redirect()->back()->withInput();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete(Request $request)
     {
         $reviews = collect($request->input('selected', []));
@@ -72,5 +87,4 @@ class ReviewController extends Controller
         }
         return redirect()->back();
     }
-
 }
