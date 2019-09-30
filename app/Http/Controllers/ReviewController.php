@@ -23,7 +23,6 @@ class ReviewController extends Controller
         $product->avgRating = Review::where('product_id', $productId)->avg('stars');
         $reviews = Review::where('product_id', $productId)->orderBy('created_at', 'desc')->paginate(3);
 
-
         $discount = Discount::orderBy('updated_at', 'desc')->first();
 
         if($discount){

@@ -10,7 +10,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'sku'=>$faker->unique()->word,
         'name'=>$faker->sentence(3, true),
         'description'=>$faker->paragraph,
-        'picture'=>$faker->imageUrl(300, 300),
+        'picture'=>$faker->imageUrl(300, 300, 'technics'),
         'price'=>$faker->numberBetween(10, 500),
         'discount'=>$faker->numberBetween(0, 32),
         'status'=>$faker->numberBetween(0, 1),

@@ -17,14 +17,14 @@ class ProductController extends Controller
     {
         $products = Product::where('status', 1)->orderBy('updated_at', 'desc')->with('review')->paginate(9);
         $discount = Discount::orderBy('updated_at', 'desc')->first();
+        $discount = $discount ? $discount : new Discount();
 
-        if($discount){
-            $this->tax = $discount->tax ? $discount->tax : 0;
-            $this->tax_active = $discount->tax_active ? $discount->tax_active : 0;
-            $this->g_discount = $discount->g_discount ? $discount->g_discount : 0;
-            $this->gd_active = $discount->gd_active ? $discount->gd_active : 0;
-            $this->gd_fixed = $discount->gd_fixed ? $discount->gd_fixed : 0;
-        }
+        $this->tax = $discount->tax ? $discount->tax : 0;
+        $this->tax_active = $discount->tax_active ? $discount->tax_active : 0;
+        $this->g_discount = $discount->g_discount ? $discount->g_discount : 0;
+        $this->gd_active = $discount->gd_active ? $discount->gd_active : 0;
+        $this->gd_fixed = $discount->gd_fixed ? $discount->gd_fixed : 0;
+
         $products->getCollection()->transform(function ($product) {
             $avgRating = $product->review->avg('stars');
             $countRating = $product->review->count('stars');

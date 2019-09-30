@@ -11,6 +11,7 @@
                     <td><img class="w-100" src="{{ $product->picture}}" alt="product"></td>
                 @endif
             </div>
+
             <div class="col-sm-8">
                 <h4 class="mb-1">{{ $product->name }}</h4>
                 <small class="text-muted">Product ID: {{ $product->sku }}</small>
@@ -50,7 +51,9 @@
             {{ $reviews->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
-
+    <div class="mb-3 ml-2">
+        <a href="{{ url()->previous() }}"><button class="btn btn-info"> <--Back</button></a>
+    </div>
     <div class="jumbotron row">
         <div class="col-sm-3">
             <h3>Leave your comment:</h3>

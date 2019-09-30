@@ -1,11 +1,11 @@
 {{--Line of price, discounted price and tax included/excluded info--}}
 
 @if($product->discount > 0 || ($discount->g_discount > 0 && $discount->gd_active == 1))
-    <del class="text-muted mr-3">{{ $product->price }} Eur</del>
+    <del class="text-muted mr-2">{{ $product->price }} Eur</del>
 
     {{-- If product has individual discount - display it and proceed to tax --}}
     <h6 class="d-inline">
-        <span class="mr-3 badge badge-warning">
+        <span class="mr-1 badge badge-warning">
             @if($product->discount > 0)
                 {{ round($product->price * (1 - $product->discount / 100), 2) }}
                     {{-- If there is no individual discount, check for global discount --}}

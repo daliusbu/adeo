@@ -76,7 +76,4 @@ class ProductController extends Controller
         }
         return redirect()->to(route('admin.product.index'));
     }
-
-
-
 }
