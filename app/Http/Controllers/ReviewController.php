@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
 use App\Review;
 use App\Services\DiscountService;
 use App\Services\ProductService;
@@ -11,6 +10,12 @@ use Mews\Purifier\Facades\Purifier;
 
 class ReviewController extends Controller
 {
+    public function index()
+    {
+        $reviews = Review::with('product')->orderBy('updated_at', 'desc')->paginate(10);
+        return view('admin.review.index', compact('reviews'));
+    }
+
     public function add($productId, ProductService $productService)
     {
         $product = $productService->getProduct($productId);
@@ -24,8 +29,15 @@ class ReviewController extends Controller
         return view('review.add', compact('product', 'reviews', 'discount'));
     }
 
-    public function store($id = null, Request $request, Review $review)
+    public function edit($id)
     {
+        $review = Review::findOrFail($id);
+        return view('admin.review.edit', ['review' => $review]);
+    }
+
+    public function store(Review $review, Request $request )
+    {
+//        dd($review);
         $request->merge([
             'product_id' => Purifier::clean($request->product_id),
             'stars' => Purifier::clean($request->rating),
@@ -42,8 +54,8 @@ class ReviewController extends Controller
         ]);
         if ($validated) {
             try {
-                $review->Create($validated);
-                return redirect()->to(route('review.add', ['product' => $request->product_id]));
+                $review->update($validated);
+                return redirect()->to(route('admin.review.index'));
             } catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->withErrors([$e->getMessage()])->withInput();
             } catch (\Exception $e) {
@@ -51,6 +63,15 @@ class ReviewController extends Controller
             }
         }
         return redirect()->back()->withInput();
+    }
+
+    public function delete(Request $request)
+    {
+        $reviews = collect($request->input('selected', []));
+        if ($reviews->isNotEmpty()) {
+            Review::destroy($reviews);
+        }
+        return redirect()->back();
     }
 
 }

@@ -12,7 +12,6 @@
                 <a class="nav-link" href="{{ route('product.index') }}">Products
                     <span class="sr-only">(current)</span></a>
             </li>
-
             @auth
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -21,8 +20,10 @@
                         Admin
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('admin.product.index') }}">List products</a>
+                        <a class="dropdown-item" href="{{ route('admin.product.index') }}">Products</a>
                         <a class="dropdown-item" href="{{ route('admin.product.add') }}">Add Product</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('admin.review.index') }}">Reviews</a>
                     </div>
                 </li>
             @endauth
@@ -43,8 +44,8 @@
                     </form>
                     @else
                         <a class="nav-item navbar-text nav-link" href="{{ route('login') }}">Login</a>
-                    @endauth
                 </li>
+            @endauth
         </ul>
     </div>
 </nav>

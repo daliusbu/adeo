@@ -16,7 +16,11 @@ Auth::routes();
 Route::get('/', function () {
     return view('home');
 })->name('home');
-//Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('product', 'ProductController@index')->name('product.index');
+Route::post('/discount/store', 'DiscountController@store')->name('discount.store');
+Route::get('/review/{product}/add', 'ReviewController@add')->name('review.add');
+Route::post('/review/store', 'ReviewController@store')->name('review.store');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/product', 'Admin\ProductController@index')->name('admin.product.index');
@@ -26,14 +30,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('admin/product/store', 'Admin\ProductController@store')->name('admin.product.store');
     Route::put('admin/product/{id}/store', 'Admin\ProductController@store')->name('admin.product.update');
     Route::delete('admin/product/delete', 'Admin\ProductController@delete')->name('admin.product.delete');
+
+    Route::get('admin/reviews', 'ReviewController@index')->name('admin.review.index');
+    Route::get('admin/review/{id}/edit', 'ReviewController@edit')->name('admin.review.edit');
+    Route::put('admin/review/{review}/store', 'ReviewController@store')->name('admin.review.update');
+    Route::delete('admin/review/delete', 'ReviewController@delete')->name('admin.review.delete');
 });
-Route::post('/discount/store', 'DiscountController@store')->name('discount.store');
-
-Route::post('/review/store', 'ReviewController@store')->name('review.store');
-
-
-
-Route::get('product', 'ProductController@index')->name('product.index');
-
-
-Route::get('/review/{product}/add', 'ReviewController@add')->name('review.add');

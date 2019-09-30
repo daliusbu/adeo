@@ -32,10 +32,6 @@
                     <button class="" type="submit">SAVE</button>
                 </div>
             </div>
-
-
-
-
         </form>
     </div>
 
@@ -143,7 +139,6 @@
             // });
         }, false);
     </script>
-
 
     {{-- Star Rating JavaScript --}}
     <script>
