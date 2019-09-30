@@ -1,14 +1,16 @@
 <?php
 
-
 namespace App\Services;
-
 
 use Illuminate\Http\Request;
 use Mews\Purifier\Facades\Purifier;
 
 class ReviewService
 {
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function validate(Request $request)
     {
         $request->merge([

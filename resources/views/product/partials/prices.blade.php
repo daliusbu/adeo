@@ -8,16 +8,18 @@
         <span class="mr-1 badge badge-warning">
             @if($product->discount > 0)
                 {{ round($product->price * (1 - $product->discount / 100), 2) }}
-                    {{-- If there is no individual discount, check for global discount --}}
-                    @elseif( $discount->gd_active && $discount->g_discount > 0 )
-                        {{-- If global discount is set and is fixed - subtract fixed value from price --}}
-                        @if ($discount->gd_fixed === 1)
-                            {{ $product->price - $discount->g_discount }}
-                        @else
-                            {{-- If global discount is set and is in percentage - subtract percentage from price --}}
-                            {{ round($product->price * (1 - $discount->g_discount / 100), 2) }}
-                        @endif
-                    @endif
+                {{-- If there is no individual discount, check for global discount --}}
+            @elseif( $discount->gd_active && $discount->g_discount > 0 )
+                {{-- If global discount is set and is fixed - subtract fixed value from price --}}
+                @if ($discount->gd_fixed === 1 && $discount->g_discount < $product->price)
+                    {{ $product->price - $discount->g_discount }}
+                @elseif($discount->g_discount < 100)
+                    {{-- If global discount is set and is in percentage - subtract percentage from price --}}
+                    {{ round($product->price * (1 - $discount->g_discount / 100), 2) }}
+                @else
+                    {{ $product->price }}
+                @endif
+            @endif
         Eur</span>
     </h6>
 @else

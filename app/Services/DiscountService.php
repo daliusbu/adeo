@@ -41,7 +41,7 @@ class DiscountService
         $validated = $request->validate([
             'tax' => 'numeric|max:50',
             'tax_active' => 'numeric',
-            'g_discount' => 'numeric|max:100',
+            'g_discount' => 'numeric',
             'gd_active' => 'numeric',
             'gd_fixed' => 'numeric|max:1',
         ]);

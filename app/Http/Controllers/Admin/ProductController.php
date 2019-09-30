@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Discount;
+use App\Services\ProductService;
+use App\Services\RepositoryService;
 use Illuminate\Http\Request;
 use App\Product;
-use Mews\Purifier\Facades\Purifier;
 
 
 class ProductController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(){
         $products = Product::orderBy('updated_at', 'desc')->paginate(9);
         $discount = Discount::orderBy('updated_at', 'desc')->first();
@@ -18,11 +22,18 @@ class ProductController extends Controller
        return view('admin.product.index', ['products'=>$products, 'discount'=>$discount]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function add(){
 
         return view('admin.product.add');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $product = Product::findOrFail($id);
@@ -30,30 +41,18 @@ class ProductController extends Controller
         return view('admin.product.edit', ['product' => $product]);
     }
 
-    public function store($id = null, Request $request, Product $product)
+    /**
+     * @param null $id
+     * @param Request $request
+     * @param Product $product
+     * @param ProductService $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store($id = null, Request $request, Product $product, ProductService $service)
     {
-        $request->merge([
-            'name' => Purifier::clean($request->name),
-            'description' => Purifier::clean($request->description),
-            'sku' => Purifier::clean($request->sku),
-            'price' => Purifier::clean($request->price),
-            'discount' => Purifier::clean($request->discount),
-            'status' => Purifier::clean($request->status),
-        ]);
-        $validated = $request->validate([
-            'name' => 'string|required|max:255',
-            'description' => 'string|required',
-            'sku' => 'string|required',
-            'price' => 'numeric|required',
-            'discount' => 'numeric|required',
-            'status' => 'numeric|required',
-            'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-
-        if ($request->picture){
-            $pictureName = time().'.'.$request->picture->extension();
-            $request->picture->move(public_path('images'), $pictureName);
-            $validated['picture'] = $pictureName;
+        $validated = $service->validate($request);
+        if (isset($validated['picture'])){
+            $validated['picture'] = $service->saveImage($request);
         }
 
         if ($validated) {
@@ -69,6 +68,10 @@ class ProductController extends Controller
         return redirect()->back()->withInput();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete(Request $request)
     {
         $products = collect($request->input('selected', []));
