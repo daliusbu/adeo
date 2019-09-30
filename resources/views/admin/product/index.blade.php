@@ -42,7 +42,7 @@
     <div class="row my-3">
         <div class="col-sm-4 mr-auto ">
             <a href="{{ route('admin.product.add') }}">ADD </a>
-            <a href="#" id="button-trash">&nbsp;DELETE</a>
+            <a href="#" id="button-trash">&nbsp;DELETE</a><small class="text-muted"> (selected)</small>
         </div>
     </div>
 

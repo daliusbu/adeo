@@ -37,13 +37,6 @@ class ProductController extends Controller
             return $product;
         });
 
-        if ($this->gd_active > 0) {
-            $products->getCollection()->transform(function ($product) {
-                $product->discount = $this->g_discount;
-                return $product;
-            });
-        }
-
         return view('product.index', ['products' => $products, 'discount' => $discount]);
     }
 }

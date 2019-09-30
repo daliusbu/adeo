@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Discount;
 use App\Product;
 use App\Review;
 use Illuminate\Http\Request;
@@ -9,26 +10,35 @@ use Mews\Purifier\Facades\Purifier;
 
 class ReviewController extends Controller
 {
-    public function index()
-    {
-
-    }
+    protected $g_discount = 0;
+    protected $gd_active = 0;
+    protected $gd_fixed = 0;
+    protected $tax = 0;
+    protected $tax_active = 0;
 
     public function add($productId)
     {
-        $reviews = Review::where('product_id', $productId)->orderBy('created_at', 'desc')->paginate(3);
         $product = Product::find($productId);
-        $count = $sum = $ratingsCount = $avgStars = 0;
-        foreach ($reviews as $review) {
-            $count++;
-            $sum += $review->stars;
-        }
-        if ($count > 0){
-            $avgStars = round($sum / $count, 1);
-            $ratingsCount = Review::where('product_id', $productId)->count();
+        $product->countRating = Review::where('product_id', $productId)->count('id');
+        $product->avgRating = Review::where('product_id', $productId)->avg('stars');
+        $reviews = Review::where('product_id', $productId)->orderBy('created_at', 'desc')->paginate(3);
+
+
+        $discount = Discount::orderBy('updated_at', 'desc')->first();
+
+        if($discount){
+            $this->tax = $discount->tax ? $discount->tax : 0;
+            $this->tax_active = $discount->tax_active ? $discount->tax_active : 0;
+            $this->g_discount = $discount->g_discount ? $discount->g_discount : 0;
+            $this->gd_active = $discount->gd_active ? $discount->gd_active : 0;
+            $this->gd_fixed = $discount->gd_fixed ? $discount->gd_fixed : 0;
         }
 
-        return view('review.add', compact('product', 'avgStars', 'ratingsCount', 'reviews'));
+        if ($this->tax > 0 && $this->tax_active > 0) {
+            $product->price = round($product->price * (1 + $this->tax / 100), 2);
+        }
+
+        return view('review.add', compact('product', 'reviews', 'discount'));
     }
 
     public function store($id = null, Request $request, Review $review)

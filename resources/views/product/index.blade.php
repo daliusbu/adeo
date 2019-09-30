@@ -5,7 +5,7 @@
     <div class="row">
         @if (isset($products))
             @foreach($products as $product)
-                <div class="col-md-4 col-sm-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="card mb-4 shadow-sm">
                         @if(file_exists(public_path().'/images/'. $product->picture))
                             <td><img class="medium-picture" src="{{ asset('images/'. $product->picture)}}" alt=""></td>
@@ -13,7 +13,7 @@
                             <td><img class="medium-picture" src="{{ $product->picture}}" alt=""></td>
                         @endif
                         <div class="card-body" style="">
-                            <div class="product-description" >
+                            <div class="product-description">
                                 <h5>{{ $product->name }}</h5>
                                 <span class="small text-muted">Article No: {{ $product->sku }}</span>
                                 <p class="card-text text-small">{!! $product->description !!}</p>
@@ -25,30 +25,13 @@
                                 </div>
                                 <div class="btn-group">
                                     <a href="{{ route('review.add', ['product'=>$product->id]) }}">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Review</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Read more
+                                        </button>
                                     </a>
                                 </div>
                             </div>
-
                             <div class="d-flex justify-content-between align-items-center small">
-                                @if($product->discount > 0 || ($discount->g_discount > 0 && $discount->gd_active == 1))
-                                    <del class="text-muted">{{ $product->price }} Eur</del>
-                                @endif
-
-                                @if($discount->gd_fixed === 1 && $discount->gd_active)
-                                    <span
-                                        class="">{{ $product->price - $product->discount }} Eur</span>
-                                @else
-                                    <span
-                                        class="">{{ round($product->price * (1 - $product->discount / 100), 2) }} Eur</span>
-                                @endif
-
-                                @if( isset($discount) && $discount->tax_active == 1)
-                                    <span>(Incl. Tax)</span>
-                                @else
-                                    <span>(Excl. Tax)</span>
-                                @endif
-
+                                @include('product.partials.prices')
                             </div>
                         </div>
                     </div>

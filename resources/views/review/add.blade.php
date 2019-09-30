@@ -1,18 +1,26 @@
 @extends('layouts.master')
 
 @section('content')
-    <h2>Product reviews and rating</h2>
+    <h2 class="my-5">Product information</h2>
     <div class="jumbotron">
         <div class="row">
             <div class="col-sm-4">
-                <img class="w-100" src="{{ $product->picture }}" alt="">
+                @if(file_exists(public_path().'/images/'. $product->picture))
+                    <td><img class="w-100" src="{{ asset('images/'. $product->picture)}}" alt="product"></td>
+                @else
+                    <td><img class="w-100" src="{{ $product->picture}}" alt="product"></td>
+                @endif
             </div>
             <div class="col-sm-8">
-                <h4>{{ $product->name }}</h4>
-                <p>{{ $product->description }}</p>
-                <h6>{{ $product->price }} Eur</h6>
-                <span class="rated">{{ $avgStars }}</span>
-                <span class="small ml-2">({{ $ratingsCount }} votes)</span>
+                <h4 class="mb-1">{{ $product->name }}</h4>
+                <small class="text-muted">Product ID: {{ $product->sku }}</small>
+                <p class="mt-3">{!! $product->description !!}</p>
+                <div class="my-3">
+                   @include('product.partials.prices')
+                </div>
+                <span class="rated">{{ $product->avgRating }}</span>
+                <span class="small ml-2">({{ $product->countRating }} Reviews)</span>
+
             </div>
         </div>
     </div>
