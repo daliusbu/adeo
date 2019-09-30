@@ -2,39 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Discount;
 use App\Product;
 use App\Review;
+use App\Services\DiscountService;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Mews\Purifier\Facades\Purifier;
 
 class ReviewController extends Controller
 {
-    protected $g_discount = 0;
-    protected $gd_active = 0;
-    protected $gd_fixed = 0;
-    protected $tax = 0;
-    protected $tax_active = 0;
-
-    public function add($productId)
+    public function add($productId, ProductService $productService)
     {
-        $product = Product::find($productId);
-        $product->countRating = Review::where('product_id', $productId)->count('id');
-        $product->avgRating = Review::where('product_id', $productId)->avg('stars');
+        $product = $productService->getProduct($productId);
         $reviews = Review::where('product_id', $productId)->orderBy('created_at', 'desc')->paginate(3);
+        $discount = DiscountService::getDiscount();
 
-        $discount = Discount::orderBy('updated_at', 'desc')->first();
-
-        if($discount){
-            $this->tax = $discount->tax ? $discount->tax : 0;
-            $this->tax_active = $discount->tax_active ? $discount->tax_active : 0;
-            $this->g_discount = $discount->g_discount ? $discount->g_discount : 0;
-            $this->gd_active = $discount->gd_active ? $discount->gd_active : 0;
-            $this->gd_fixed = $discount->gd_fixed ? $discount->gd_fixed : 0;
-        }
-
-        if ($this->tax > 0 && $this->tax_active > 0) {
-            $product->price = round($product->price * (1 + $this->tax / 100), 2);
+        if ($discount->tax > 0 && $discount->tax_active > 0) {
+            $product->price = round($product->price * (1 + $discount->tax / 100), 2);
         }
 
         return view('review.add', compact('product', 'reviews', 'discount'));
