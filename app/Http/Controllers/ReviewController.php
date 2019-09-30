@@ -37,7 +37,6 @@ class ReviewController extends Controller
 
     public function store(Review $review, Request $request )
     {
-//        dd($review);
         $request->merge([
             'product_id' => Purifier::clean($request->product_id),
             'stars' => Purifier::clean($request->rating),
