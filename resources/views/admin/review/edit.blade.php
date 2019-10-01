@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="product_name">Author</label>
-                <input class="form-control-sm col-sm-8" type="text"  name="username" value="{{ $review->username }}" readonly>
+                <input class="form-control-sm col-sm-8" type="text" name="username" value="{{ $review->username }}" readonly>
             </div>
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="name">Title</label>
@@ -24,16 +24,14 @@
             </div>
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="rating">Rating</label>
-                <input class="form-control-sm col-sm-8" type="text" name="rating" id="rating"
-                       value="{{ $review->stars }}">
+                <input class="form-control-sm col-sm-8" type="text" name="rating" id="rating" value="{{ $review->stars }}">
             </div>
             <div class="row my-3">
                 <div class="col-sm-2">
                     <label class="col-form-label-sm" for="summernote">Comment</label>
                 </div>
                 <div class="col-sm-10">
-                    <textarea class="" name="comment"
-                              id="summernote">{{ $review->comment }}</textarea>
+                    <textarea class="" name="comment" id="summernote">{{ $review->comment }}</textarea>
                 </div>
             </div>
 

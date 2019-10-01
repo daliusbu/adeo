@@ -13,5 +13,4 @@ class Discount extends Model
       'gd_active',
       'gd_fixed',
     ];
-
 }

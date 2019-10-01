@@ -5,10 +5,10 @@
     @include('partials.form-errors')
 
     <div>
-        <form class="col-md-8" action="{{ route('admin.product.update', ['id'=>$product->id]) }}" method="POST"
-              enctype="multipart/form-data">
+        <form class="col-md-8" action="{{ route('admin.product.update', ['id'=>$product->id]) }}" method="POST" enctype="multipart/form-data">
             @method("PUT")
             @csrf
+
             <input type="hidden" name="status" value="0">
             <label class="col-sm-2" for="status">Status</label>
             <input class="ml-3" type="checkbox" name="status" value="1"
@@ -26,12 +26,11 @@
             </div>
             <div class="row my-3">
                 <div class="col-sm-2">
-                    <label class="col-form-label-sm" for="summernote">Description</label>
+                    <label class="col-form-label-sm"  for="summernote">Description</label>
                 </div>
 
                 <div class="col-sm-10">
-                    <textarea class="" name="description"
-                              id="summernote">{{ $product->description }}</textarea>
+                    <textarea class="" name="description" id="summernote">{{ $product->description }}</textarea>
                 </div>
             </div>
             <div class="form-group">

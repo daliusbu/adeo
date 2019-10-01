@@ -45,7 +45,6 @@ class DiscountService
             'gd_active' => 'numeric',
             'gd_fixed' => 'numeric|max:1',
         ]);
-
         $validated['tax'] = $validated['tax'] === "" ? null : $validated['tax'];
         $validated['g_discount'] = $validated['g_discount'] === "" ? null : $validated['g_discount'];
 

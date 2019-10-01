@@ -47,42 +47,9 @@
             <h5 class="text-center">Please come back in a while.</h5>
         </div>
     @endif
-
 @endsection
 
 @section('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Trash form submit
-            document.getElementById('button-trash').addEventListener('click', function () {
-                var checked = false;
-                var elements = document.getElementsByName("selected[]");
-                for (var i = 0; i < elements.length; i++) {
-                    if (elements[i].checked) {
-                        checked = true;
-                    }
-                }
-                if (!checked) {
-                    alert('Please check the Product you want to delete.');
-                    return;
-                }
-                const confirmed = confirm("Delete selected items?");
-                if (confirmed) {
-                    document.getElementById('selected-form').submit();
-                }
-            });
-
-            // Select all checkbox
-            document.getElementById('select-all').addEventListener('click', function () {
-                check = this.checked;
-                boxes = document.querySelectorAll('input[name="selected[]"]:not(:disabled)');
-                boxes.forEach(function (item) {
-                    item.checked = check;
-                });
-            });
-        }, false);
-    </script>
-
     {{-- Star Rating JavaScript --}}
     <script>
         $(function () {

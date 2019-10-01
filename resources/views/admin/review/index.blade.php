@@ -2,7 +2,6 @@
 
 @section('content')
     <h2>Reviews list</h2>
-
     <div class="row my-3">
         <div class="col-sm-4 mr-auto ">
             <a href="#" id="button-trash">&nbsp;DELETE</a><small class="text-muted"> (selected)</small>
@@ -19,7 +18,6 @@
         <form id="selected-form" method="POST" action="{{ route('admin.review.delete') }}">
             @csrf
             @method('DELETE')
-
             <table class="table table-responsive table-striped">
                 <thead>
                 <tr>
@@ -88,10 +86,6 @@
                     item.checked = check;
                 });
             });
-            // Filter form submit on select change
-            // document.getElementById('list-filter').addEventListener('change', function () {
-            //     document.getElementById('filter-form').submit();
-            // });
         }, false);
     </script>
 @endsection

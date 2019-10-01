@@ -9,6 +9,10 @@ class ProductController extends Controller
 {
     protected $discount;
 
+    /**
+     * @param ProductService $productService
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(ProductService $productService)
     {
         $discount = DiscountService::getDiscount();

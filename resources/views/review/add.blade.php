@@ -11,17 +11,13 @@
                     <td><img class="w-100" src="{{ $product->picture}}" alt="product"></td>
                 @endif
             </div>
-
             <div class="col-sm-8">
                 <h4 class="mb-1">{{ $product->name }}</h4>
                 <small class="text-muted">Product ID: {{ $product->sku }}</small>
                 <p class="mt-3">{!! $product->description !!}</p>
-                <div class="my-3">
-                   @include('product.partials.prices')
-                </div>
+                <div class="my-3"> @include('product.partials.prices')</div>
                 <span class="rated">{{ $product->avgRating }}</span>
-                <span class="small ml-2">({{ $product->countRating }} Reviews)</span>
-
+                <span class="small ml-2">({{ $product->countRating }} Reviews) </span>
             </div>
         </div>
     </div>
@@ -52,7 +48,9 @@
         </div>
     </div>
     <div class="mb-3 ml-2">
-        <a href="{{ url()->previous() }}"><button class="btn btn-info"> <--Back</button></a>
+        <a href="{{ url()->previous() }}">
+            <button class="btn btn-info"> <--Back</button>
+        </a>
     </div>
     <div class="jumbotron row">
         <div class="col-sm-3">

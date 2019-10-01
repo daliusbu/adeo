@@ -48,6 +48,7 @@ class ReviewController extends Controller
     public function edit($id)
     {
         $review = Review::findOrFail($id);
+
         return view('admin.review.edit', ['review' => $review]);
     }
 
@@ -72,6 +73,7 @@ class ReviewController extends Controller
                 return redirect()->back()->withErrors([$e->getMessage()])->withInput();
             }
         }
+
         return redirect()->back()->withInput();
     }
 
@@ -85,6 +87,7 @@ class ReviewController extends Controller
         if ($reviews->isNotEmpty()) {
             Review::destroy($reviews);
         }
+
         return redirect()->back();
     }
 }

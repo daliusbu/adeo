@@ -28,6 +28,7 @@ class DiscountController extends Controller
                 return redirect()->back()->withErrors([$e->getMessage()])->withInput();
             }
         }
+
         return redirect()->back()->withInput();
     }
 }

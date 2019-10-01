@@ -5,27 +5,27 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Discount;
 use App\Services\ProductService;
-use App\Services\RepositoryService;
 use Illuminate\Http\Request;
 use App\Product;
-
 
 class ProductController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(){
+    public function index()
+    {
         $products = Product::orderBy('updated_at', 'desc')->paginate(9);
         $discount = Discount::orderBy('updated_at', 'desc')->first();
 
-       return view('admin.product.index', ['products'=>$products, 'discount'=>$discount]);
+        return view('admin.product.index', ['products' => $products, 'discount' => $discount]);
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function add(){
+    public function add()
+    {
 
         return view('admin.product.add');
     }
@@ -51,7 +51,7 @@ class ProductController extends Controller
     public function store($id = null, Request $request, Product $product, ProductService $service)
     {
         $validated = $service->validate($request);
-        if (isset($validated['picture'])){
+        if (isset($validated['picture'])) {
             $validated['picture'] = $service->saveImage($request);
         }
         if ($validated) {
@@ -59,11 +59,12 @@ class ProductController extends Controller
                 $product->updateOrCreate(['id' => $id], $validated);
                 return redirect()->to(route('admin.product.index'));
             } catch (\Illuminate\Database\QueryException $e) {
-                return redirect()->back()->withErrors([ $e->getMessage()])->withInput();
+                return redirect()->back()->withErrors([$e->getMessage()])->withInput();
             } catch (\Exception $e) {
-                return redirect()->back()->withErrors([ $e->getMessage()])->withInput();
+                return redirect()->back()->withErrors([$e->getMessage()])->withInput();
             }
         }
+
         return redirect()->back()->withInput();
     }
 
@@ -77,6 +78,7 @@ class ProductController extends Controller
         if ($products->isNotEmpty()) {
             Product::destroy($products);
         }
+
         return redirect()->to(route('admin.product.index'));
     }
 }

@@ -15,8 +15,7 @@
             </div>
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="name">Name</label>
-                <input class="form-control-sm col-sm-8" type="text" name="name" id="name"
-                       value="{{ request()->old('name') }}">
+                <input class="form-control-sm col-sm-8" type="text" name="name" id="name" value="{{ request()->old('name') }}">
             </div>
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="name">SKU</label>
@@ -24,27 +23,26 @@
                        value="{{ request()->old('sku') }}">
             </div>
             <div class="row my-3">
-
-
                 <div class="col-sm-2">
                     <label class="col-form-label-sm" for="ck-editor-field">Description</label>
                 </div>
                 <div class="col-sm-10">
-                    <textarea class="" name="description"
-                              id="summernote">{{ request()->old('description') }}</textarea>
+                    <textarea class="" name="description" id="summernote">{{ request()->old('description') }}</textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="price">Price <strong>(cents)</strong></label>
-                <input class="form-control-sm col-sm-8" type="text" name="price"  value="{{ request()->old('price') }}">
+                <input class="form-control-sm col-sm-8" type="text" name="price" value="{{ request()->old('price') }}">
             </div>
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="discount">Discount (%)</label>
-                <input class="form-control-sm col-sm-8" type="text" name="discount"  value="{{ request()->old('discount') }}">
+                <input class="form-control-sm col-sm-8" type="text" name="discount"
+                       value="{{ request()->old('discount') }}">
             </div>
             <div class="form-group">
                 <label class="col-form-label-sm col-sm-2" for="picture">Picture</label>
-                <input class="form-control-sm col-sm-8" type="file" name="picture" value="{{ request()->old('picture') }}">
+                <input class="form-control-sm col-sm-8" type="file" name="picture"
+                       value="{{ request()->old('picture') }}">
             </div>
 
             <button class="mt-3 mb-5 offset-2 btn btn-info btn-small" type="submit">Save Product</button>

@@ -125,7 +125,7 @@
                 }
             });
 
-            // Select all checkbox
+            // Select all checkboxes
             document.getElementById('select-all').addEventListener('click', function () {
                 check = this.checked;
                 boxes = document.querySelectorAll('input[name="selected[]"]:not(:disabled)');
@@ -133,19 +133,13 @@
                     item.checked = check;
                 });
             });
-            // Filter form submit on select change
-            // document.getElementById('list-filter').addEventListener('change', function () {
-            //     document.getElementById('filter-form').submit();
-            // });
         }, false);
     </script>
 
     {{-- Star Rating JavaScript --}}
     <script>
-        //Make sure that the dom is ready
         $(function () {
             $("#rateYo").rateYo({
-                // rating: 3.6
                 onSet: function (rating, rateYoInstance) {
                     $('#ratingas').val(rating);
                     alert("Rating is set to: " + rating);
