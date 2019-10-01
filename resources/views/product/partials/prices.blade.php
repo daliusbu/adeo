@@ -1,5 +1,9 @@
 {{--Line of price, discounted price and tax included/excluded info--}}
 
+@php
+    $product->price = $product->price/100;
+@endphp
+
 @if($product->discount > 0 || ($discount->g_discount > 0 && $discount->gd_active == 1))
     <del class="text-muted mr-2">{{ $product->price }} Eur</del>
 

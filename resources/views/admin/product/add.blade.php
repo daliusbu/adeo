@@ -35,11 +35,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-form-label-sm col-sm-2" for="price">Price</label>
+                <label class="col-form-label-sm col-sm-2" for="price">Price <strong>(cents)</strong></label>
                 <input class="form-control-sm col-sm-8" type="text" name="price"  value="{{ request()->old('price') }}">
             </div>
             <div class="form-group">
-                <label class="col-form-label-sm col-sm-2" for="discount">Discount</label>
+                <label class="col-form-label-sm col-sm-2" for="discount">Discount (%)</label>
                 <input class="form-control-sm col-sm-8" type="text" name="discount"  value="{{ request()->old('discount') }}">
             </div>
             <div class="form-group">
@@ -47,7 +47,7 @@
                 <input class="form-control-sm col-sm-8" type="file" name="picture" value="{{ request()->old('picture') }}">
             </div>
 
-            <button class="my-4 offset-2" type="submit">Save Product</button>
+            <button class="mt-3 mb-5 offset-2 btn btn-info btn-small" type="submit">Save Product</button>
             <a class="ml-5" href="{{ route('admin.product.index') }}"><-- Back</a>
         </form>
     </div>

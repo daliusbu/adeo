@@ -35,11 +35,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-form-label-sm col-sm-2" for="price">Price</label>
+                <label class="col-form-label-sm col-sm-2" for="price">Price <strong>(cents)</strong></label>
                 <input class="form-control-sm col-sm-8" type="text" name="price" value="{{ $product->price }}">
             </div>
             <div class="form-group">
-                <label class="col-form-label-sm col-sm-2" for="discount">Discount</label>
+                <label class="col-form-label-sm col-sm-2" for="discount">Discount (%)</label>
                 <input class="form-control-sm col-sm-8" type="text" name="discount" value="{{ $product->discount }}">
             </div>
             <div class="form-group">
