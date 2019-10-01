@@ -54,7 +54,6 @@ class ProductController extends Controller
         if (isset($validated['picture'])){
             $validated['picture'] = $service->saveImage($request);
         }
-
         if ($validated) {
             try {
                 $product->updateOrCreate(['id' => $id], $validated);
